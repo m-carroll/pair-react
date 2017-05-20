@@ -1,5 +1,29 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.entry {
+}
+.sadness {
+  color: white;
+  background-color: blue;
+}
+.anger {
+  background-color: pink;
+}
+.disgust {
+  background-color: greenyellow;
+}
+.joy {
+  background-color: #0FFBFF;
+}
+.fear {
+  background-color: lemonchiffon;
+}
+.app {
+  vertical-align: top;
+}
+.sidebar-parent {
+  border: 2px solid lightgray;
+}
+.feed-parent {
+  border: 2px solid lightgray;
+  height: 500px;
+  overflow: scroll;
 }

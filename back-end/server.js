@@ -21,14 +21,15 @@ app.get('/aggregate', (req, res) => {
 })
 
 app.get('/titles', (req,res) => {
-    let index = Math.floor((sources.length * Math.random()))
+    let index = Math.floor(((sources.length - 1) * Math.random()))
     const url = `https://newsapi.org/v1/articles?source=${sources[index]}&sortBy=latest&apiKey=34ead2be5107488bba0bfe2a0c5108b3` 
     request.get(url, (err, response, body) => {
         if (err) console.log(err)
         else {
             let obj = JSON.parse(body)
             if (!obj.articles) return res.send(err)
-            let text = obj.articles[0].title
+            let articleIndex = Math.floor((obj.articles.length - 1) * Math.random())
+            let article = obj.articles[articleIndex]
             var tone_analyzer = watson.tone_analyzer({
             username:'400255c9-30ba-46a7-a9d9-e8f8f1527a3d',
             password: 'cDJCW1aFvqCK',
@@ -36,13 +37,13 @@ app.get('/titles', (req,res) => {
             version_date: '2016-05-19'
             })
             tone_analyzer.tone({
-                text: text,
+                text: article.title,
                 tones: 'emotion'
                 }, function(err,tone) {
                     if (err){
                         console.log(err)
                     } else {
-                        return res.send({tone, headline: text, source: sources[index]})
+                        return res.send({tone: tone.document_tone.tone_categories[0].tones, article, source: sources[index]})
                     }
                 }
             )
