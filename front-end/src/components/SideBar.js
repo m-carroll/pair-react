@@ -9,19 +9,26 @@ class SideBar extends Component {
                     {type:'JOY', score:0}, 
                     {type:'SADNESS', score:0}
                    ]
-    let JSXStats = this.props.titles.reduce( (prev, curr) => {
-      return curr.tone.map((x, i) => {
-        return prev[i] + x.score
+    let JSXStats 
+    if (this.props.titles.length) {
+      JSXStats = this.props.titles.reduce( (prev, curr) => {
+        return curr.tone.map((x, i) => {
+          return prev[i] + x.score
+        })
+      }, [0,0,0,0,0]).map( (x, i) => {
+        return {type:toneStats[i].type, score: x / this.props.titles.length}
+      }).sort((a, b) => {
+        return a.score < b.score
+      }).map( x => {
+        return <div className="sidebar-emotion">
+                {x.type} 
+                <div className={`${x.type.toLowerCase()}`} style={{'width':`${Math.floor(x.score*100)}%`, 'height': '25px'}}>
+                </div>
+              </div>
       })
-    }, [0,0,0,0,0]).map( (x, i) => {
-      return {type:toneStats[i].type, score: x / this.props.titles.length}
-    }).sort((a, b) => {
-      return a.score < b.score
-    }).map( x => {
-      return <h3>{x.type}: {Math.floor(x.score*100000)/100000}</h3>
-    })
+    } else JSXStats = toneStats.map( x => { return <div className="sidebar-emotion">{x.type}:</div> })
     return (
-      <div className="sidebar-parent col-sm-5 pull-right">
+      <div className="sidebar-parent col-sm-6 pull-right">
         <form className="">
         </form>
         {JSXStats}

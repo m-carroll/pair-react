@@ -12,6 +12,9 @@ class App extends Component {
       agreggate: null,
     }
     this.requestFunction = this.requestFunction.bind(this)
+    this.playFeed = this.playFeed.bind(this)
+    this.pauseFeed = this.pauseFeed.bind(this)
+    this.clearTitles = this.clearTitles.bind(this)
   }
   componentWillMount() {
     setInterval(this.requestFunction, 500)
@@ -29,20 +32,22 @@ class App extends Component {
       })
     }
   }
-  setPlay(){
-    this.setState({play: !this.state.play})
+  playFeed() {
+    this.setState({play: true})
   }
-
+  pauseFeed() {
+    this.setState({play:false})
+  }
   clearTitles(){
     this.setState({titles: []})
   }
-
   render() {
     return (
       <div className="App container">
         <h1> Today's Mood </h1>
-        <Feed setPlay={this.setPlay.bind(this)} 
-              clearTitles={this.clearTitles.bind(this)} 
+        <Feed playFeed={this.playFeed}
+              pauseFeed={this.pauseFeed} 
+              clearTitles={this.clearTitles} 
               play={this.state.play}
               titles={this.state.titles} />
         <SideBar titles={this.state.titles} />

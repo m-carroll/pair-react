@@ -1,8 +1,19 @@
 .entry {
+  display: block;
+  color: black;
+  text-decoration:none;
+  border: 2px solid white;
+  padding: 3px 6px;
+  font-size: 1.25em;
+}
+.entry:hover {
+  text-decoration:none;
+  opacity: 0.5;
+  color: rgba(0,0,0,1);
 }
 .sadness {
   color: white;
-  background-color: blue;
+  background-color: dodgerblue;
 }
 .anger {
   background-color: pink;
@@ -21,9 +32,17 @@
 }
 .sidebar-parent {
   border: 2px solid lightgray;
+  margin-top: 33px;
 }
-.feed-parent {
+.sidebar-emotion {
+  font-size: 25px;
+}
+.sidebar-emotion div {
+  font-size: 25px;
+  border: 1px solid black;
+}
+.feed {
   border: 2px solid lightgray;
   height: 500px;
-  overflow: scroll;
+  overflow-y: auto;
 }

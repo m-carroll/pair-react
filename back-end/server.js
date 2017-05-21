@@ -37,7 +37,7 @@ app.get('/titles', (req,res) => {
             version_date: '2016-05-19'
             })
             tone_analyzer.tone({
-                text: article.title,
+                text: article.title + ' ' + article.description,
                 tones: 'emotion'
                 }, function(err,tone) {
                     if (err){
