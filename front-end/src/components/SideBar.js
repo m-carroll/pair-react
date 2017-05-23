@@ -19,14 +19,14 @@ class SideBar extends Component {
         return {type:toneStats[i].type, score: x / this.props.titles.length}
       }).sort((a, b) => {
         return a.score < b.score
-      }).map( x => {
-        return <div className="sidebar-emotion">
+      }).map( (x, i) => {
+        return <div key={i} className="sidebar-emotion">
                 {x.type} 
-                <div className={`${x.type.toLowerCase()}`} style={{'width':`${Math.floor(x.score*100)}%`, 'height': '25px'}}>
+                <div className={`${x.type.toLowerCase()}`} style={{'width':`${Math.floor(x.score*200)}%`, 'height': '25px'}}>
                 </div>
               </div>
       })
-    } else JSXStats = toneStats.map( x => { return <div className="sidebar-emotion">{x.type}:</div> })
+    } else JSXStats = toneStats.map( (x, i) => { return <div key={i} className="sidebar-emotion">{x.type}:</div> })
     return (
       <div className="sidebar-parent col-sm-6 pull-right">
         <form className="">

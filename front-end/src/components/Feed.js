@@ -16,18 +16,20 @@ class Feed extends Component {
     assignClass(tone) {
         return tone.reduce( (prev, curr) => {return prev.score > curr.score ? prev : curr}).tone_id
     }
-    assignOpacity(tone) {
+    maxScore(tone) {
         return tone.reduce( (prev, curr) => {return prev.score > curr.score ? prev : curr}).score
     }
 
     render(){
-        let JSXTitles = this.props.titles.map( x => {
-            return <a href={x.article.url}
-                      style={{opacity: this.assignOpacity(x.tone)}}
+        let JSXTitles = this.props.titles.map( (x, i) => {
+            return <a key={i}
+                      href={x.article.url}
+                      style={{opacity: this.maxScore(x.tone) < 0.5 ? 0.5 : 1}}
                       target="_blank" 
+                      rel="noopener noreferrer"
                       className={`entry ${this.assignClass(x.tone)}`} 
                       onClick={this.clickHaltResume}>
-                      {x.article.title}
+                      {x.article.title} | {x.source.split('-').map(x => {return x[0].toUpperCase()+x.slice(1, x.length)}).join(' ')}
                    </a>
         })
         return(

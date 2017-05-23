@@ -8,24 +8,23 @@
 }
 .entry:hover {
   text-decoration:none;
-  opacity: 0.5;
-  color: rgba(0,0,0,1);
+  background-color: white;
+
 }
 .sadness {
-  color: white;
   background-color: dodgerblue;
 }
 .anger {
-  background-color: pink;
+  background-color: red;
 }
 .disgust {
   background-color: greenyellow;
 }
 .joy {
-  background-color: #0FFBFF;
+  background-color: yellow;
 }
 .fear {
-  background-color: lemonchiffon;
+  background-color: violet;
 }
 .app {
   vertical-align: top;

@@ -16,17 +16,14 @@ app.use(function(req, res, next) {
     next()
 })
 
-app.get('/aggregate', (req, res) => {
-    res.send(getHeadlines(50))
-})
-
-app.get('/titles', (req,res) => {
+app.get('/title', (req,res) => {
     let index = Math.floor(((sources.length - 1) * Math.random()))
     const url = `https://newsapi.org/v1/articles?source=${sources[index]}&sortBy=latest&apiKey=34ead2be5107488bba0bfe2a0c5108b3` 
     request.get(url, (err, response, body) => {
         if (err) console.log(err)
         else {
             let obj = JSON.parse(body)
+            console.log(obj)
             if (!obj.articles) return res.send(err)
             let articleIndex = Math.floor((obj.articles.length - 1) * Math.random())
             let article = obj.articles[articleIndex]
@@ -50,18 +47,6 @@ app.get('/titles', (req,res) => {
         }
     })
 })
-
-
-function getHeadLines(number){
-    request.get(url, (err, res, body) => {
-     if (err) {
-         console.log(err)
-     } else {
-        return JSON.parse(body).articles.map( (x)=>{return x.title})
-     }
- })
-
-}
 
 function getSources(){
     const url = `https://newsapi.org/v1/sources?language=en` ; 
